@@ -1,0 +1,21 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: xiangyw
+      password: xiangyw
+      database: test
+      authenticationDatabase: test
+      arrayProps: 1,2,3,4,5
+      listmap:
+        - name: abc
+          value: abcValue
+        - name: efg
+          value: efgValue
+      list:
+        - config2Value1
+        - config2Vavlue2
+      map:
+        key1: value1
+        key2: value2
