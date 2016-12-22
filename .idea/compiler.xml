@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="redistest" target="1.5" />
-      <module name="sbrm" target="1.6" />
+      <module name="sbrm" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

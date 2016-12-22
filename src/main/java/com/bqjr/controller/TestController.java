@@ -1,5 +1,7 @@
 package com.bqjr.controller;
 
+import com.bqjr.jpa.entity.UserDb;
+import com.bqjr.jpa.services.UserDbService;
 import com.bqjr.model.Response;
 import com.bqjr.mongo.entity.UserMongo;
 import com.bqjr.mongo.services.UserService;
@@ -23,6 +25,8 @@ public class TestController extends BaseController{
     @Autowired
     private UserService userService;
     @Autowired
+    private UserDbService userDbService;
+    @Autowired
     private RedisTemplate redisTemplate;
 
     public TestController(UserService userService) {
@@ -36,12 +40,6 @@ public class TestController extends BaseController{
         log.error("hello error");
         return "index";
     }
-    @RequestMapping(value = "/mongo/findAll/user")
-    @ResponseBody
-    public Object findAll() {
-        List<UserMongo> userMongo =userService.findAll();
-        return Response.success(userMongo);
-    }
     @RequestMapping(value = "/mongo/add/user")
     @ResponseBody
     public Object addOne() {
@@ -51,6 +49,12 @@ public class TestController extends BaseController{
         u.setUsername("xiangyw");
         userService.insert(u);
         return Response.success(u);
+    }
+    @RequestMapping(value = "/mongo/findAll/user")
+    @ResponseBody
+    public Object findAll() {
+        List<UserMongo> userMongo =userService.findAll();
+        return Response.success(userMongo);
     }
     @RequestMapping(value = "redis/add/user")
     @ResponseBody
@@ -68,4 +72,20 @@ public class TestController extends BaseController{
         UserRedis u= (UserRedis) redisTemplate.opsForValue().get(username);
         return Response.success(u);
     }
+    @RequestMapping(value = "/jpa/add/user")
+    @ResponseBody
+    public Object addOneDb() {
+        UserDb u=new UserDb();
+        u.setUsername("xiangyw"+System.currentTimeMillis());
+        u.setPhone("15802846520");
+        userDbService.insert(u);
+        return Response.success(u);
+    }
+    @RequestMapping(value = "/jpa/findAll/user")
+    @ResponseBody
+    public Object findAllDb() {
+        List<UserDb> userDb =userDbService.findAll();
+        return Response.success(userDb);
+    }
+
 }

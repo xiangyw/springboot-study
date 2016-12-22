@@ -23,7 +23,6 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAll();
     }
 
-    @Transactional(propagation= Propagation.REQUIRED,timeout = 5,isolation = Isolation.REPEATABLE_READ)
     public void insert(UserMongo userMongo) {
         userRepository.save(userMongo);
     }
